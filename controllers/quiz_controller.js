@@ -86,3 +86,9 @@ exports.update = function(req,res) {
 	    }
 	);
 };
+
+exports.destroy = function(req,res){
+	req.quiz.destroy().then( function() {
+	   res.render('quizes');
+	}).catch(function(error){next(error)});
+};
