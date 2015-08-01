@@ -5,7 +5,7 @@ exports.load = function(req, res, next, quizId) {
 	 function(quiz){
 	   if (quiz) {
 	       req.quiz = quiz;
-    	       next()
+    	       next();
 	   }else { next (new Error('No existe quizId=' + quizId)); }
 	  }
 	).catch(function(error) { next(error);});
@@ -16,17 +16,13 @@ exports.load = function(req, res, next, quizId) {
 exports.index = function(req, res) {
 	if(req.query.search === undefined) {
 		models.Quiz.findAll().then(function(quizes) {
-		res.render('quizes/index.ejs', {quizes: quizes, errors: []});
-	}).catch(function(error){next(error);})
-
-
-	} else {
+		res.render('quizes/index.ejs', {quizes: quizes, errors: []});}
+		).catch(function(error){next(error);})
+	}else{
 		//models.Quiz.findAll().then(function(quizes) {
 		models.Quiz.findAll({order:["pregunta"] ,where: ["pregunta like ?",'%'+req.query.search+'%']}).then(function(quizes){
-		res.render('quizes/index.ejs', {quizes: quizes, errors: [] });
-	}).catch(function(error){next(error);})
-
-
+		res.render('quizes/index.ejs', {quizes: quizes, errors: [] });}
+		).catch(function(error){next(error);})
 	}
 };
 
@@ -50,18 +46,33 @@ exports.new = function(req,res) {
 	res.render('quizes/new', {quiz: quiz, errors: []});
 };
 
-exports.create = function(req,res) {
+exports.create = function(req, res) {
+
+	var quiz = models.Quiz.build( req.body.quiz);
+
+	quiz.validate().then(
+ 	    function (err){
+		if(err){
+			res.render('quizes/new', {quiz: quiz, errors:err.errors});
+		}else{
+			quiz.save({fields: ["pregunta", "respuesta", "categoria"]}).then(function(){res.redirect('/quizes')});
+		}
+   	    }
+		);
+};
+
+/*exports.create = function(req,res) {
 	var quiz = models.Quiz.build( req.body.quiz );
-	var errors = quiz.validate();
+	
 	if (errors) {
 	   var i=0; var errores = new Array();
 	   for (var prop in errors) errores[i++] = {message: errors[prop]};
             res.render('quizes/new',{quiz: quiz, errors:[]});
 	} else {
-	   quiz.save({fields:["pregunta","respuesta","categoria"]})
+	   quiz.save({fields:["pregunta", "respuesta", "categoria"]})
            .then( function(){res.render('/quizes')})
         }
-};
+};*/
 
 exports.edit = function(req,res){
 	var quiz = req.quiz;
@@ -90,6 +101,6 @@ exports.update = function(req,res) {
 
 exports.destroy = function(req,res){
 	req.quiz.destroy().then( function() {
-	   res.render('quizes');
+	   res.render('/quizes');
 	}).catch(function(error){next(error)});
 };
