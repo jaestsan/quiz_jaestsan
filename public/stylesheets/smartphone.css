@@ -2,7 +2,7 @@ body {
 	background: #333;
 }
 
-#page-wra:after { Contente: "Smartphone Layout" }
+#page-wra:after { Content: "Smartphone Layout" }
 
 h2 span, section h3 {display:none; }
 

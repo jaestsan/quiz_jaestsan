@@ -16,13 +16,17 @@ exports.load = function(req, res, next, quizId) {
 exports.index = function(req, res) {
 	if(req.query.search === undefined) {
 		models.Quiz.findAll().then(function(quizes) {
-		res.render('quizes/index.ejs', {quizes: quizes, errors: []});}
-		).catch(function(error){next(error);})
+		res.render('quizes/index.ejs', {quizes: quizes, errors: []});
+		}).catch(function(error){next(error);})
+
+
 	}else{
 		//models.Quiz.findAll().then(function(quizes) {
-		models.Quiz.findAll({order:["pregunta"] ,where: ["pregunta like ?",'%'+req.query.search+'%']}).then(function(quizes){
-		res.render('quizes/index.ejs', {quizes: quizes, errors: [] });}
-		).catch(function(error){next(error);})
+		models.Quiz.findAll({order:["pregunta"] ,where: ["pregunta like ?",'%'+req.query.search+'%']})
+                .then(function(quizes) {
+			res.render('quizes/index.ejs', {quizes: quizes, errors: []});
+		}).catch(function(error){next(error);})
+	
 	}
 };
 

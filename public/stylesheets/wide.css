@@ -2,7 +2,7 @@ body {
 	background: #999;
 }
 
-#page-wra:after { Contente: "Wide Layout" }
+#page-wra:after { Content: "Wide Layout" }
 
 nav {float:left; width: 15px; height: 200px; }
 
