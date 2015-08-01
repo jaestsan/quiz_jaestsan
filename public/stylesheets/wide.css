@@ -1,13 +1,31 @@
-body {
-	background: #999;
-}
+body { background: #EDCFCF; }
+#page-wrap:after { content: "Wide Layout"; }
+nav { float: left; width: 15%; height: 370px ;}
+nav span { margin: 0px 100px 0px 0px;}
+section { float: right; width: 80%; height: 370px ;}
+footer { clear: both; display: block;height: 30px; }
+#Pregunta {margin-right: 27px;}
+#EnviarPregunta{margin-top: 26px; margin-left: 65px;}
+#separacionFooter {margin-right: 95px;margin-left: 248px;}
+#separacionFooter, #separacionFooterdos {background: #C0BCBC;}
+a {text-decoration:none;color: #121BDB;}
+h1 {margin-bottom: 23px;margin-top: 41px;}
+#titles {margin-left: 240px;}
+#uno {margin-bottom: 26px;}
+#menuno, #menudos, #menutres {margin-bottom: 11px;background: #C0BCBC;}
+#tabla {margin-top: 36px;}
+#hh{margin-top: 30px;}
+#hh, #tabla {text-align: justify;}
+#consulta {margin-top: 62px;}
+#volver {margin-top: 10px;  }
+#volver2{background: #C0BCBC;}
 
-#page-wra:after { Content: "Wide Layout" }
+#crear {margin-left: -206px;margin-top: 45px;height: 48px;color: #595D4B;}
+#nuevaP {margin-top: 44px;}
+#Sep {margin-top: 19px;}
+#Sep2 {margin-top: 27px;}
 
-nav {float:left; width: 15px; height: 200px; }
-
-nav span { margin: 0px 100px 0px 0px ; }
-
-section  { float: right; width: 80px; height: 200px; }
-
-footer { clear: both ; display: block; }
+#sepauno{margin-top: 47px;}
+#sepados{margin-top: 19px;margin-bottom: 18px;}
+#sepCom {margin-top: 11px;}
+#estadisticas {text-align: justify;margin-left: 138px;}
