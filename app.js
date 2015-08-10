@@ -5,10 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
-var routes = require('./routes/index');
-
 var connect = require('connect');
 var methodOverride = require('method-override');
+var session = require('express-session');
+
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -24,9 +25,40 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cookieParser('Quiz 2015'));
+app.use(session());
 
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req,res,next){
+    var momento = new Date();
+
+        if(req.session.user){
+            if(req.session.user.time){
+                var sesion = new Date(req.session.user.time);
+                var difDate= momento - sesion;
+                        if(difDate>120000){
+                            delete req.session.user;
+                            next();
+                            return;
+                        }
+            }
+            req.session.user.time= new Date(); //Vuelve a activar el "contador"
+        }
+        next();
+});
+
+app.use(function(req, res, next) {
+
+        // guardar path en session.redir para despues de login
+        if (!req.path.match(/\/login|\/logout/)) {
+            req.session.redir = req.path;
+        }
+        // Hacer visible req.session en las vistas
+        res.locals.session = req.session;
+        next();
+});
 
 app.use('/', routes);
 
@@ -36,8 +68,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace

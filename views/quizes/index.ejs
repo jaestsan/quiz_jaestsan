@@ -1,25 +1,36 @@
+<body>
+<section class="main" id="s1">
+
+
+<form id="hh" method="get" action="/quizes"> Buscar:
+<input type="text" name="search" value="Busque la pregunta que desee"/>
+<input type= "submit" value ="Buscar">
+</form>
+
+
 <table id="tabla">
  <% var i; for (i=0; i < quizes.length; i++) { %>
  		<tr>
 			<td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta + " (" +quizes[i].categoria+")" %></a></td>
+			<%if (session.user){%>
+
 			<td><a href="quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a></td>
 			<td>
-			 <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+				 <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
 					 <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
 						 Borrar
 					 </button>
 				 </form>
 			 </td>
+			<%}%>
 		</tr> 
 	<% } %>
 </table>
 
-<form method="get" action="/quizes">
-    <label for="search">Palabra clave: </label>
-    <input type="text" name="search" value="" placeholder="Escriba texto a buscar">
-    <input type="submit" value="Enviar">
-  </form>
-</table><p>
+<%if (session.user){%>
+<a href="/quizes/new"> <button type="button" id="crear">Crear pregunta </button></a>
+<%}%>
+</section>
 
-<p>
-<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+
+</body>
