@@ -1,51 +1,57 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>preguntas</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet'
-	  type='text/css'
-	  media='only screen and (mid-width:530px) and (min-device-width: 481px)'
-	  href='/stylesheets/wide.css' />
-    <link rel='stylesheet'
-          type='text/css'
-          media='only screen and (max-width:480px)'
-          href='/stylesheets/smartphone.css' />
+<html lang="en">
+<head>
+	<meta charset="utf-8"><title> Preguntas </title>
+	<link rel='stylesheet' type='text/css' href='/stylesheets/style.css' />
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-  </head>
-  <body>
-    <div id="page-wrap">
-     <header class=main" id="h1">
-       <%if(!session.user){%>
-	<span class="right"><a href="/login">Login</a></span>
-       <%}else{%>
-	 <span class="right"><%=session.user.username%><a href="/logout">Logout</a></span>
-       <%}%>
-       <h2>Quiz<span>: El juego de las preguntas</span></h2>
-     </header>  	
 
-     <nav class="main" id="n1" role="navigation">
-	<span><a href="/">Inicio</a></span>
-	<span><a href="/quizes">Preguntas</a></span>
-     </nav>
+	<link rel='stylesheet' type='text/css'media='only screen and (min-width:530px) and (min-device-width: 481px)' href='/stylesheets/wide.css'/>
+	<link rel='stylesheet' type='text/css'media='only screen and (max-width:480px)' href='/stylesheets/smartphone.css'/>
 
-     <section class="main" id="s1">
-	<% if (errors.length) { %>
-	  <span id='ErrorMsg'>
-	    Corregir errores:<br/>
-	    <% for (var i in errors) { %>
-		<span> <%= errors[i].message %> </span><br/>
-            <% } %>
-	  </span>
+</head>
+
+<body>
+<div id="page-wrap">
+	<header class="main" id="h1">
+		<%if(!session.user){%>
+			<span class="right"><a href="/login">Login</a></span>
+ 		<%}else{%>
+			 <span class="right"> <%=session.user.username%> <a href="/logout">Logout</a></span>
+ 		<%}%>
+ 		
+		<h2 id="titles">Quiz<span>: el juego de las preguntas</span></h2>
+	</header>
+
+	<nav class="main" id="n1" role="navigation">
+		<p id="menuno"><a href="/">Inicio</a></p>
+		<p id="menudos"><a href="/quizes">Preguntas</a></p>
+		<p id="menutres"><a href="/author/">Autores</a></p>
+		<p id="menutres"><a href="/statics">Estadisticas</a></p>
+	</nav>
+
+	<section class="main" id="s1">
+
+	<% if (errors.length){ %>
+
+		<span id='ErrorMsgs'>
+		Corregir errores:</br>
+		<% for (var i in errors) {%>
+
+			<span> <%= errors[i].message %> </span></br>
+		<% } %>
+		</span>
 	<% } %>
-	<%- body %>
-     </section>
 
-     <footer class="main" id="f1">
-       <a href="http://es.wikipedia.org/wiki/Quiz">¿Que es un Quiz?</a>
-        <a href="https://github.com/jaestsan/quiz_jaestsan">Mi GitHUB Quiz</a>
-     </footer>
-    </div>
-  </body>
+		<%-body%>
+
+	</section>
+
+	<footer class="main" id="f1">
+		<a id="separacionFooter" href="http://es.wikipedia.org/wiki/Quiz">¿Que es un Quiz?</a>
+		<a id="separacionFooterdos" href="https://github.com/raquelterve/quiz2015">GitHub - raquelterv</a>
+	</footer>
+
+</div>
+</body>
 </html>

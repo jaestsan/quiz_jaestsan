@@ -49,4 +49,3 @@ exports.publish = function(req, res) {
 		.then( function(){ res.redirect('/quizes/'+req.params.quizId);} )
 		.catch(function(error){next(error)});
 }; 
-

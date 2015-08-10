@@ -1,4 +1,13 @@
-<p>
-   <%= respuesta %> <p>
-   <a href="/quizes/<% quiz.id %>">Volver</a>
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'><title>Quiz</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p id="consulta">
+      <%= respuesta %> <p id="volver">
+      <a id="volver2"href="/quizes/<%= quiz.id %>">Volver</a>
+    </p>
+  </body>
+</html>
